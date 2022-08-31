@@ -42,7 +42,7 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
         }
     }
         // Добавление User'ов в таблицу
-    public void saveUser(String name, String lastName, byte age) throws SQLException { // НЕ работает
+    public void saveUser(String name, String lastName, byte age) throws SQLException { //  работает
         try (Connection connection = getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO usersnew (name, lastname, age) VALUES (?, ?, ?)");
             preparedStatement.setString(1, name);
@@ -65,7 +65,7 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
         }
 
             // Получение всех User(ов) из таблицы
-    public List<User> getAllUsers() { // НЕ работает *
+    public List<User> getAllUsers() {
         List<User> userList = new ArrayList<>();
 
         try (Connection connection = getConnection()) {
@@ -85,7 +85,7 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
     }
 
     // Очистка содержания таблицы
-    public void cleanUsersTable() {  //НЕ работает ?
+    public void cleanUsersTable() {
         try (Connection connection = getConnection()) {
             Statement statement = connection.createStatement();
             statement.executeUpdate("TRUNCATE TABLE usersnew");
