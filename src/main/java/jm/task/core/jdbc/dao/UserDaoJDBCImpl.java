@@ -28,8 +28,8 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
     public void createUsersTable() throws SQLException { //работает
         try (Connection connection = getConnection()) {
             Statement statement = connection.createStatement();
-            statement.executeUpdate("CREATE TABLE IF NOT EXISTS UsersNew " +
-                    "(id BIGINT PRIMARY KEY AUTO_INCREMENT, name VARCHAR(40), last_name VARCHAR(40), age INT(3))");
+            statement.executeUpdate("CREATE TABLE UsersNew " +
+                    "(Id INT PRIMARY KEY AUTO_INCREMENT, name VARCHAR(40), lastname VARCHAR(40),age INT(3))");
         } catch (SQLException e) {
         }
     }
@@ -37,14 +37,14 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
     public void dropUsersTable() throws SQLException { //работает
         try (Connection connection = getConnection()) {
             Statement statement = connection.createStatement();
-            statement.executeUpdate("DROP TABLE IF EXISTS users");
+            statement.executeUpdate("DROP TABLE UsersNew");
         } catch (SQLException e) {
         }
     }
         // Добавление User'ов в таблицу
     public void saveUser(String name, String lastName, byte age) throws SQLException { // НЕ работает
         try (Connection connection = getConnection()) {
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO usersnew (name, last_name, age) VALUES (?, ?, ?)");
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO usersnew (name, lastname, age) VALUES (?, ?, ?)");
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, lastName);
             preparedStatement.setByte(3, age);
