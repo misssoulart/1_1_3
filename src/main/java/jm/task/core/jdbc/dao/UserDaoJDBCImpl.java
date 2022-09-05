@@ -7,9 +7,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
+import static jm.task.core.jdbc.util.Util.getConnection;
 // Обработка всех исключений, связанных с работой с базой данных должна находиться в dao
-public class UserDaoJDBCImpl extends Util implements UserDao {
+public class UserDaoJDBCImpl implements UserDao {
 
      /*private static final Connection connection;
 
@@ -31,6 +31,7 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
             statement.executeUpdate("CREATE TABLE UsersNew " +
                     "(Id INT PRIMARY KEY AUTO_INCREMENT, name VARCHAR(40), lastname VARCHAR(40),age INT(3))");
         } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
         // Удаление таблицы User'ов
@@ -39,6 +40,7 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
             Statement statement = connection.createStatement();
             statement.executeUpdate("DROP TABLE UsersNew");
         } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
         // Добавление User'ов в таблицу
@@ -51,6 +53,7 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
             preparedStatement.executeUpdate();
             System.out.println("Добавлен юзер - " + name + " в базу данных");
         } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
     // Удаление User'ов из таблицы ( по id )
@@ -61,6 +64,7 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
                 preparedStatement.setLong(1, id);
                 preparedStatement.executeUpdate();
             } catch (SQLException e) {
+                e.printStackTrace();
             }
         }
 
@@ -71,6 +75,7 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
         try (Connection connection = getConnection()) {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT ID, NAME, LASTNAME, AGE FROM USERSNEW");
+
             while (resultSet.next()) {
                 User user = new User();
                 user.setId(resultSet.getLong("ID"));
@@ -80,6 +85,7 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
                 userList.add(user);
             }
         } catch (SQLException e) {
+            e.printStackTrace();
         }
         return userList;
     }
@@ -90,6 +96,7 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
             Statement statement = connection.createStatement();
             statement.executeUpdate("TRUNCATE TABLE usersnew");
         } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }
