@@ -7,23 +7,22 @@ import javax.persistence.*;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    //@Column(name = "id")
     private Long id;
 
-    @Column // (name = "name")
+    @Column
     private String name;
 
-    @Column // (name = "lastname")
+    @Column
     private String lastName;
 
-    @Column // (name = "age")
+    @Column
     private Byte age;
 
     public User() {
 
     }
 
-    public User(Class<User> userClass, long id) {
+    public User (Class<User> userClass, long id) {
 
     }
 
